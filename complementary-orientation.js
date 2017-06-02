@@ -64,7 +64,7 @@ ComplementaryOrientation.prototype.setScreenTransform_ = function() {
     case 90:
       this.worldToScreenQ.setFromAxisAngle(new THREE.Vector3(0, 0, 1), -Math.PI/2);
       break;
-    case -90: 
+    case -90:
       this.worldToScreenQ.setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI/2);
       break;
     case 180:
@@ -85,5 +85,7 @@ ComplementaryOrientation.prototype.getOrientation = function() {
   out.copy(this.filterToWorldQ);
   out.multiply(this.predictedQ);
   out.multiply(this.worldToScreenQ);
+  var EulerAngle = new THREE.Euler().setFromQuaternion(out);
+  console.log(EulerAngle)
   return out;
 };
