@@ -72,6 +72,10 @@ ComplementaryOrientation.prototype.setScreenTransform_ = function() {
   }
 };
 
+Math.degrees = function(radians) {
+  return radians * 180 / Math.PI;
+};
+
 ComplementaryOrientation.prototype.getOrientation = function() {
   // Convert from filter space to the the same system used by the
   // deviceorientation event.
@@ -86,6 +90,7 @@ ComplementaryOrientation.prototype.getOrientation = function() {
   out.multiply(this.predictedQ);
   out.multiply(this.worldToScreenQ);
   var EulerAngle = new THREE.Euler().setFromQuaternion(out);
-  console.log(EulerAngle)
+  var s = "Euler Angles in Degrees - x: "+Math.degrees(EulerAngle.x)+", y: "+Math.degrees(EulerAngle.y)+", z: "+Math.degrees(EulerAngle.z);
+  console.log(s)
   return out;
 };
