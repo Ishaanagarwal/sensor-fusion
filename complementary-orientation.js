@@ -82,15 +82,17 @@ ComplementaryOrientation.prototype.getOrientation = function() {
   var orientation = this.filter.getOrientation();
 
   // Predict orientation.
-  this.predictedQ = this.posePredictor.getPrediction(orientation, this.gyroscope, this.previousTimestampS);
+//  this.predictedQ = this.posePredictor.getPrediction(orientation, this.gyroscope, this.previousTimestampS);
 
   // Convert to THREE coordinate system: -Z forward, Y up, X right.
   var out = new THREE.Quaternion();
   out.copy(this.filterToWorldQ);
-  out.multiply(this.predictedQ);
+  out.multiply(orientation);
   out.multiply(this.worldToScreenQ);
   var EulerAngle = new THREE.Euler().setFromQuaternion(out);
-  var s = "Euler Angles in Degrees - x: "+Math.degrees(EulerAngle.x)+", y: "+Math.degrees(EulerAngle.y)+", z: "+Math.degrees(EulerAngle.z);
+
+  var s = "Euler Angles in Degrees - x: "+Math.degrees(EulerAngle.x).toPrecision(5)+", y: "+Math.degrees(EulerAngle.y).toPrecision(5)+", z: "+Math.degrees(EulerAngle.z).toPrecision(5);
   console.log(s)
   return out;
+
 };
