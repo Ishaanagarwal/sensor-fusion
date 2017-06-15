@@ -89,7 +89,7 @@ ComplementaryOrientation.prototype.getOrientation = function() {
   out.copy(this.filterToWorldQ);
   out.multiply(orientation);
   out.multiply(this.worldToScreenQ);
-  var EulerAngle = new THREE.Euler().setFromQuaternion(out);
+  var EulerAngle = new THREE.Euler().setFromQuaternion(out,'YZX');
 
   var s = "Euler Angles in Degrees - x: "+Math.degrees(EulerAngle.x).toPrecision(5)+", y: "+Math.degrees(EulerAngle.y).toPrecision(5)+", z: "+Math.degrees(EulerAngle.z).toPrecision(5);
   console.log(s)
